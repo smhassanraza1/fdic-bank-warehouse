@@ -1,0 +1,30 @@
+# Keeps secrets out of the build context so a future `COPY . .` can't bake them into a layer.
+.env
+*.env.local
+gcp-credentials.json
+*.pem
+*.key
+
+# Not needed in any image, and the largest things in the context.
+.git/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+uv.lock
+
+# Local run artifacts.
+data/
+bronze/
+dbt/target/
+dbt/logs/
+dbt/dbt_packages/
+transform/spark-warehouse/
+transform/metastore_db/
+derby.log
+
+tests/
+.github/
+README.md

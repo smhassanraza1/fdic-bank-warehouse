@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: cleaned
+    database: "{{ env_var('BQ_PROJECT') }}"
+    schema: "{{ env_var('BQ_DATASET', 'fig_gold') }}"
+    tables:
+      - name: cleaned_institution_history
+      - name: cleaned_financials
+      - name: cleaned_branch_deposits

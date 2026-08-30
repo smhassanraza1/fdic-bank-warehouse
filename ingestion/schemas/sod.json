@@ -1,0 +1,412 @@
+{
+  "ADDRESBR": {
+    "description": "ADDRESS (BRANCH)",
+    "title": "ADDRESS (BRANCH)",
+    "type": "string"
+  },
+  "ADDRESS": {
+    "description": "ADDRESS",
+    "title": "ADDRESS",
+    "type": "string"
+  },
+  "ASSET": {
+    "description": "TOTAL ASSETS",
+    "title": "TOTAL ASSETS",
+    "type": "number"
+  },
+  "BKCLASS": {
+    "description": "INSTITUTION CLASS",
+    "title": "INSTITUTION CLASS",
+    "type": "string"
+  },
+  "BKMO": {
+    "description": "MAIN OFFICE DESIGNATION FLAG",
+    "title": "MAIN OFFICE DESIGNATION FLAG",
+    "type": "number"
+  },
+  "BRCENM": {
+    "description": "CENCODES C",
+    "title": "CENCODES C",
+    "type": "string"
+  },
+  "BRNUM": {
+    "description": "BRANCH NUMBER",
+    "title": "BRANCH NUMBER",
+    "type": "number"
+  },
+  "BRSERTYP": {
+    "description": "BRANCH SERVICE TYPE",
+    "title": "BRANCH SERVICE TYPE",
+    "type": "number"
+  },
+  "CALL": {
+    "description": "REPORT TYPE",
+    "title": "REPORT TYPE",
+    "type": "string"
+  },
+  "CB": {
+    "description": "A flag used to indicate whether an institution is a community bank. 0 = Not a community Bank. 1 = Is a community bank. For more information, visit the community bank research program page: https://www.fdic.gov/community-banking-research-program.",
+    "title": "COMMUNITY BANK FLAG",
+    "type": "number"
+  },
+  "CBSA_DIV_NAMB": {
+    "description": "CBSA DIVISION NAME (BRANCH)",
+    "title": "CBSA DIVISION NAME (BRANCH)",
+    "type": "string"
+  },
+  "CERT": {
+    "description": "FDIC CERT NUMBER",
+    "title": "FDIC CERT NUMBER",
+    "type": "number"
+  },
+  "CHARTER": {
+    "description": "CHARTER",
+    "title": "CHARTER",
+    "type": "string"
+  },
+  "CHRTAGNN": {
+    "description": "CHARTER AGENT NAME",
+    "title": "CHARTER AGENT NAME",
+    "type": "string"
+  },
+  "CHRTAGNT": {
+    "description": "CHARTER AGENT CODE",
+    "title": "CHARTER AGENT CODE",
+    "type": "string"
+  },
+  "CITY": {
+    "description": "CITY (MAIN OFFICE)",
+    "title": "CITY (MAIN OFFICE)",
+    "type": "string"
+  },
+  "CITY2BR": {
+    "description": "PREFERRED CITY (BRANCH)",
+    "title": "PREFERRED CITY (BRANCH)",
+    "type": "string"
+  },
+  "CITYBR": {
+    "description": "CITY (BRANCH)",
+    "title": "CITY (BRANCH)",
+    "type": "string"
+  },
+  "CITYHCR": {
+    "description": "CITY-HOLDING CO.- REGULATORY",
+    "title": "CITY-HOLDING CO.- REGULATORY",
+    "type": "string"
+  },
+  "CLCODE": {
+    "description": "CLASS NUMBER",
+    "title": "CLASS NUMBER",
+    "type": "number"
+  },
+  "CNTRYNA": {
+    "description": "COUNTRY NAME (MAIN OFFICE)",
+    "title": "COUNTRY NAME (MAIN OFFICE)",
+    "type": "string"
+  },
+  "CNTRYNAB": {
+    "description": "COUNTRY NAME (BRANCH)",
+    "title": "COUNTRY NAME (BRANCH)",
+    "type": "string"
+  },
+  "CNTYNAMB": {
+    "description": "COUNTY NAME (BRANCH)",
+    "title": "COUNTY NAME (BRANCH)",
+    "type": "string"
+  },
+  "CNTYNUMB": {
+    "description": "FIPS COUNTY CODE (BRANCH)",
+    "title": "FIPS COUNTY CODE (BRANCH)",
+    "type": "number"
+  },
+  "CONSOLD": {
+    "description": "CONSOLIDATED BRANCH NUMBER",
+    "title": "CONSOLIDATED BRANCH NUMBER",
+    "type": "number"
+  },
+  "CSABR": {
+    "description": "CSA NUMBER (BRANCH)",
+    "title": "CSA NUMBER (BRANCH)",
+    "type": "number"
+  },
+  "CSANAMBR": {
+    "description": "CSA NAME (BRANCH)",
+    "title": "CSA NAME (BRANCH)",
+    "type": "string"
+  },
+  "DENOVO": {
+    "description": "DENOVO FLAG",
+    "title": "DENOVO FLAG",
+    "type": "number"
+  },
+  "DEPDOM": {
+    "description": "TOTAL DOMESTIC DEPOSITS",
+    "title": "TOTAL DOMESTIC DEPOSITS",
+    "type": "number"
+  },
+  "DEPSUM": {
+    "description": "TOTAL DEPOSITS",
+    "title": "TOTAL DEPOSITS",
+    "type": "number"
+  },
+  "DEPSUMBR": {
+    "description": "DOMESTIC DEPOSITS (SOD)",
+    "title": "DOMESTIC DEPOSITS (SOD)",
+    "type": "number"
+  },
+  "DIVISIONB": {
+    "description": "CBSA DIVISION CODE (BRANCH)",
+    "title": "CBSA DIVISION CODE (BRANCH)",
+    "type": "number"
+  },
+  "DOCKET": {
+    "description": "OTS DOCKET NUMBER",
+    "title": "OTS DOCKET NUMBER",
+    "type": "number"
+  },
+  "ESCROW": {
+    "description": "ESCROW ACCOUNTS - TFR",
+    "title": "ESCROW ACCOUNTS - TFR",
+    "type": "number"
+  },
+  "FDICDBS": {
+    "description": "FDIC REGION NUMBER",
+    "title": "FDIC REGION NUMBER",
+    "type": "number"
+  },
+  "FDICNAME": {
+    "description": "FDIC REGION NAME",
+    "title": "FDIC REGION NAME",
+    "type": "string"
+  },
+  "FED": {
+    "description": "FRB DISTRICT NUMBER",
+    "title": "FRB DISTRICT NUMBER",
+    "type": "number"
+  },
+  "FEDNAME": {
+    "description": "FED DISTRICT NAME",
+    "title": "FED DISTRICT NAME",
+    "type": "string"
+  },
+  "HCTMULT": {
+    "description": "MULTI-BANK HOLDING CO",
+    "title": "MULTI-BANK HOLDING CO",
+    "type": "string"
+  },
+  "INSAGNT1": {
+    "description": "PRIMARY INSURANCE FUND",
+    "title": "PRIMARY INSURANCE FUND",
+    "type": "string"
+  },
+  "INSBRDD": {
+    "description": "DEMAND DEPOSITS IN INSURED BRANCHES",
+    "title": "DEMAND DEPOSITS IN INSURED BRANCHES",
+    "type": "number"
+  },
+  "INSBRTS": {
+    "description": "TIME & SAVINGS DEPOSITS IN INSURED BRANCHES",
+    "title": "TIME & SAVINGS DEPOSITS IN INSURED BRANCHES",
+    "type": "number"
+  },
+  "INSURED": {
+    "description": "INSURED",
+    "title": "INSURED",
+    "type": "string"
+  },
+  "METROBR": {
+    "description": "METRO FLAG (BRANCH)",
+    "title": "METRO FLAG (BRANCH)",
+    "type": "number"
+  },
+  "MICROBR": {
+    "description": "MICRO FLAG (BRANCH)",
+    "title": "MICRO FLAG (BRANCH)",
+    "type": "number"
+  },
+  "MSABR": {
+    "description": "MSA (BRANCH)",
+    "title": "MSA (BRANCH)",
+    "type": "number"
+  },
+  "MSANAMB": {
+    "description": "MSA NAME (BRANCH)",
+    "title": "MSA NAME (BRANCH)",
+    "type": "string"
+  },
+  "NAMEBR": {
+    "description": "INSTITUTION NAME (BRANCH)",
+    "title": "INSTITUTION NAME (BRANCH)",
+    "type": "string"
+  },
+  "NAMEFULL": {
+    "description": "INSTITUTION NAME (MAIN OFFICE)",
+    "title": "INSTITUTION NAME (MAIN OFFICE)",
+    "type": "string"
+  },
+  "NAMEHCR": {
+    "description": "BANK HOLDING CO. NAME",
+    "title": "BANK HOLDING CO. NAME",
+    "type": "string"
+  },
+  "NECNAMB": {
+    "description": "NECTA NAME (BRANCH)",
+    "title": "NECTA NAME (BRANCH)",
+    "type": "string"
+  },
+  "NECTABR": {
+    "description": "NECTA (BRANCH)",
+    "title": "NECTA (BRANCH)",
+    "type": "string"
+  },
+  "OCCDIST": {
+    "description": "OCC DISTRICT NUMBER",
+    "title": "OCC DISTRICT NUMBER",
+    "type": "number"
+  },
+  "OCCNAME": {
+    "description": "OCC REGION NAME",
+    "title": "OCC REGION NAME",
+    "type": "string"
+  },
+  "PLACENUM": {
+    "description": "PLACE CODE NUMBER (DF)",
+    "title": "PLACE CODE NUMBER (DF)",
+    "type": "number"
+  },
+  "REGAGNT": {
+    "description": "PRIMARY FEDERAL REGULATOR",
+    "title": "PRIMARY FEDERAL REGULATOR",
+    "type": "string"
+  },
+  "RSSDHCR": {
+    "description": "FRB ID NUMBER - BHC",
+    "title": "FRB ID NUMBER - BHC",
+    "type": "number"
+  },
+  "RSSDID": {
+    "description": "FRB ID NUMBER",
+    "title": "FRB ID NUMBER",
+    "type": "number"
+  },
+  "SIMS_ACQUIRED_DATE": {
+    "description": "SIMS ACQUIRED DATE",
+    "title": "SIMS ACQUIRED DATE",
+    "type": "string"
+  },
+  "SIMS_DESCRIPTION": {
+    "description": "SIMS MATCH CODE (DESCRIPTION)",
+    "title": "SIMS MATCH CODE (DESCRIPTION)",
+    "type": "string"
+  },
+  "SIMS_ESTABLISHED_DATE": {
+    "description": "SIMS ESTABLISHED DATE",
+    "title": "SIMS ESTABLISHED DATE",
+    "type": "string"
+  },
+  "SIMS_LATITUDE": {
+    "description": "SIMS GEOGRAPHIC LATITUDE",
+    "title": "SIMS GEOGRAPHIC LATITUDE",
+    "type": "number"
+  },
+  "SIMS_LONGITUDE": {
+    "description": "SIMS GEOGRAPHIC LONGITUDE",
+    "title": "SIMS GEOGRAPHIC LONGITUDE",
+    "type": "number"
+  },
+  "SIMS_PROJECTION": {
+    "description": "SIMS SCORE (PROJECTION)",
+    "title": "SIMS SCORE (PROJECTION)",
+    "type": "string"
+  },
+  "SPECDESC": {
+    "description": "SPECGRP DESCRIPTION",
+    "title": "SPECGRP DESCRIPTION",
+    "type": "string"
+  },
+  "SPECGRP": {
+    "description": "INDUSTRY SPECIALIZATION GROUP",
+    "title": "INDUSTRY SPECIALIZATION GROUP",
+    "type": "number"
+  },
+  "STALP": {
+    "description": "FIPS STATE ALPHA CODE (MAIN OFFICE)",
+    "title": "FIPS STATE ALPHA CODE (MAIN OFFICE)",
+    "type": "string"
+  },
+  "STALPBR": {
+    "description": "FIPS STATE ALPHA CODE (BRANCH)",
+    "title": "FIPS STATE ALPHA CODE (BRANCH)",
+    "type": "string"
+  },
+  "STALPHCR": {
+    "description": "FIPS STATE ALPHA CODE - BHC",
+    "title": "FIPS STATE ALPHA CODE - BHC",
+    "type": "string"
+  },
+  "STCNTY": {
+    "description": "FIPS STATE & COUNTY NO. (MAIN OFFICE)",
+    "title": "FIPS STATE & COUNTY NO. (MAIN OFFICE)",
+    "type": "number"
+  },
+  "STCNTYBR": {
+    "description": "",
+    "title": "",
+    "type": "number"
+  },
+  "STNAME": {
+    "description": "FIPS STATE NAME (MAIN OFFICE)",
+    "title": "FIPS STATE NAME (MAIN OFFICE)",
+    "type": "string"
+  },
+  "STNAMEBR": {
+    "description": "STATE NAME (BRANCH)",
+    "title": "STATE NAME (BRANCH)",
+    "type": "string"
+  },
+  "STNUMBR": {
+    "description": "FIPS STATE CODE (BRANCH)",
+    "title": "FIPS STATE CODE (BRANCH)",
+    "type": "number"
+  },
+  "UNINUMBR": {
+    "description": "UNINUM (BRANCH)",
+    "title": "UNINUM (BRANCH)",
+    "type": "number"
+  },
+  "UNIT": {
+    "description": "UNIT BANK FLAG",
+    "title": "UNIT BANK FLAG",
+    "type": "number"
+  },
+  "USA": {
+    "description": "USA LOCATED INSTITUTION",
+    "title": "USA LOCATED INSTITUTION",
+    "type": "number"
+  },
+  "YEAR": {
+    "description": "YEAR",
+    "title": "YEAR",
+    "type": "number"
+  },
+  "ZIP": {
+    "description": "The first three, four, or five digits of the full postal zip code representing physical location of the institution or one of its branch offices.",
+    "title": "Zip Code",
+    "type": "string"
+  },
+  "ZIPBR": {
+    "description": "The first three, four, or five digits of the full postal zip code representing physical location of the institution or one of its branch offices.",
+    "title": "Zip Code",
+    "type": "string"
+  },
+  "ZIPBR_RAW": {
+    "description": "",
+    "title": "",
+    "type": "string"
+  },
+  "ZIP_RAW": {
+    "description": "",
+    "title": "",
+    "type": "string"
+  }
+}

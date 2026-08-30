@@ -1,0 +1,155 @@
+x-airflow-common: &airflow-common
+  build:
+    context: .
+    dockerfile: Dockerfile.airflow
+  env_file:
+    - .env
+  environment:
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:-}
+    # Project code (ingestion/, transform/, loaders/, dbt/) is importable from DAGs via this mount.
+    PYTHONPATH: /opt/airflow/project
+    # .env's path is host-relative; the container mounts credentials elsewhere.
+    GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/gcp-credentials.json
+    # profiles.yml is committed and mounted with dbt/; no host ~/.dbt needed.
+    DBT_PROFILES_DIR: /opt/airflow/project/dbt
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./ingestion:/opt/airflow/project/ingestion
+    - ./transform:/opt/airflow/project/transform
+    - ./loaders:/opt/airflow/project/loaders
+    - ./dbt:/opt/airflow/project/dbt
+    - ./gcp-credentials.json:/opt/airflow/gcp-credentials.json:ro
+    - airflow-logs:/opt/airflow/logs
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  kafka:
+    image: apache/kafka:3.9.0
+    container_name: kafka
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://:29092,CONTROLLER://:29093,PLAINTEXT_HOST://:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:29093
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      # PLAINTEXT with auto-topic-creation on: loopback only, never exposed to a network.
+      - "127.0.0.1:9092:9092"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # A consumer is a service, not an Airflow task: it stays up between filings, owns its offsets,
+  # and must not go down just because a batch DAG isn't running.
+  stream-consumer:
+    build:
+      context: .
+      dockerfile: Dockerfile.streaming
+    container_name: stream-consumer
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # .env's localhost:9092 is the host-side listener; in-network clients use the other one.
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    command: ["python", "-m", "streaming.consumer", "--max-empty-polls", "0"]
+    volumes:
+      - ./streaming:/app/streaming
+      - ./ingestion:/app/ingestion
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  # Reads only the curated layer -- no Kafka/Airflow/R2 dependency, so it starts standalone.
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: fig-api
+    restart: unless-stopped
+    # No env_file: passed only BigQuery vars, not the R2 write keys a read-only service has no use for.
+    environment:
+      # .env's path is host-relative; the container mounts credentials elsewhere.
+      GOOGLE_APPLICATION_CREDENTIALS: /app/gcp-credentials.json
+      BQ_PROJECT: ${BQ_PROJECT}
+      BQ_DATASET: ${BQ_DATASET:-fig_gold}
+      BQ_LOCATION: ${BQ_LOCATION:-US}
+    ports:
+      # Loopback-only: the container mounts a GCP key, so it must not be reachable from the LAN.
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./api:/app/api
+      - ./loaders:/app/loaders
+      - ./gcp-credentials.json:/app/gcp-credentials.json:ro
+    healthcheck:
+      test: ["CMD-SHELL", "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/health')\""]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: airflow-postgres
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: airflow-init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      # Local-development credentials only. The webserver binds to loopback and this stack is
+      # not meant to be deployed; anything internet-facing needs a real user store, not this.
+      - airflow db migrate && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com || true
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: airflow-webserver
+    command: webserver
+    ports:
+      # Loopback-only: this UI can trigger DAGs that run with the mounted GCP key and R2 secrets,
+      # so reaching it is equivalent to holding both.
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: airflow-scheduler
+    command: scheduler
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+
+volumes:
+  postgres-data:
+  airflow-logs:

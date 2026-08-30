@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: dim_institution
+    columns:
+      - name: institution_sk
+        tests:
+          - unique
+          - not_null
+      - name: bkclass
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['NM', 'SM', 'N', 'SI', 'SB', 'NC', 'SL', 'OI']
+      - name: state
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['AK', 'AL', 'AR', 'AZ', 'CA', 'CO', 'CT', 'DC', 'DE', 'FL', 'FM',
+                         'GA', 'GU', 'HI', 'IA', 'ID', 'IL', 'IN', 'KS', 'KY', 'LA', 'MA',
+                         'MD', 'ME', 'MI', 'MN', 'MO', 'MS', 'MT', 'NC', 'ND', 'NE', 'NH',
+                         'NJ', 'NM', 'NV', 'NY', 'OH', 'OK', 'OR', 'PA', 'PR', 'RI', 'SC',
+                         'SD', 'TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY']
+
+  - name: dim_date
+    columns:
+      - name: date_day
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_bank_quarterly_financials
+    columns:
+      - name: cert
+        tests:
+          - not_null
+      - name: repdte
+        tests:
+          - not_null
+      - name: institution_sk
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_institution')
+                field: institution_sk
+      - name: bkclass
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['NM', 'SM', 'N', 'SI', 'SB', 'NC', 'SL', 'OI']
+
+  - name: mart_latest_financials
+    columns:
+      - name: cert
+        tests:
+          - unique
+          - not_null
+      - name: latest_repdte
+        tests:
+          - not_null
+
+  - name: mart_profitability_trends
+    columns:
+      - name: cert
+        tests:
+          - not_null
+
+  - name: mart_asset_growth
+    columns:
+      - name: cert
+        tests:
+          - not_null
+
+  - name: mart_deposit_concentration
+    columns:
+      - name: cert
+        tests:
+          - not_null
+      - name: state
+        tests:
+          - not_null

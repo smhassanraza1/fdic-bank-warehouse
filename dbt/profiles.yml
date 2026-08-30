@@ -1,0 +1,14 @@
+# Safe to commit: every value is env_var()-sourced, no credentials live in this file.
+fig_data_platform:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('BQ_PROJECT') }}"
+      dataset: "{{ env_var('BQ_DATASET', 'fig_gold') }}"
+      location: "{{ env_var('BQ_LOCATION', 'US') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
+      threads: 4
+      job_execution_timeout_seconds: 300
+      job_retries: 1

@@ -1,0 +1,14 @@
+# Own image, not the Airflow one: this is a long-running service, needs no scheduler or JDK.
+FROM python:3.13-slim
+
+WORKDIR /app
+COPY requirements-streaming.txt /tmp/requirements-streaming.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-streaming.txt
+
+ENV PYTHONPATH=/app PYTHONUNBUFFERED=1
+
+# Drop root: the consumer buffers in memory and writes to R2, never to the container filesystem.
+RUN useradd --create-home --uid 1000 app
+USER app
+
+CMD ["python", "-m", "streaming.consumer"]

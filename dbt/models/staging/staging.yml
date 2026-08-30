@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_institution_history
+    columns:
+      - name: cert
+        tests:
+          - not_null
+      - name: valid_from
+        tests:
+          - not_null
+      - name: valid_to
+        tests:
+          - not_null
+
+  - name: stg_financials
+    columns:
+      - name: cert
+        tests:
+          - not_null
+      - name: repdte
+        tests:
+          - not_null
+
+  - name: stg_branch_deposits
+    columns:
+      - name: cert
+        tests:
+          - not_null
+      - name: uninumbr
+        tests:
+          - not_null
+      - name: repdte
+        tests:
+          - not_null

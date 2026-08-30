@@ -1,0 +1,10 @@
+# Exact-pinned so a rebuild months from now reproduces this environment, not a re-resolve.
+httpx==0.28.1
+boto3==1.43.64
+python-dotenv==1.2.2
+# 19.0.0 is broken (apache/arrow#45283); never float below 19.0.1.
+pyarrow==19.0.1
+pyspark==4.2.0
+google-cloud-bigquery==3.42.3
+dbt-core==1.12.0
+dbt-bigquery==1.12.0

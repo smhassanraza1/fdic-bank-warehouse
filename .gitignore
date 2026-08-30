@@ -1,0 +1,68 @@
+# Secrets
+.env
+*.env.local
+gcp-credentials.json
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# uv
+.uv/
+
+# Spark
+transform/spark-warehouse/
+transform/metastore_db/
+derby.log
+*.crc
+_SUCCESS
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml
+.dbt/
+
+# Airflow
+airflow/logs/
+airflow/plugins/
+**/airflow.db
+**/airflow.cfg
+**/webserver_config.py
+**/airflow-worker.pid
+**/airflow-webserver.pid
+**/airflow-scheduler.pid
+
+# Docker volumes / local data
+data/
+bronze/
+.docker-volumes/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Terraform (unused, but guarded anyway)
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Local agent/session material, never part of the repo
+.claude/
+sessions/
+
+# Images
+*.png

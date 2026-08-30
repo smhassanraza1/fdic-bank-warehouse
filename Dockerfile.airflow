@@ -1,0 +1,14 @@
+# Extends Airflow with a JDK, since spark_clean needs one and the base image ships none.
+FROM apache/airflow:2.10.5-python3.12
+
+USER root
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends default-jdk-headless \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s "$(dirname "$(dirname "$(readlink -f "$(command -v java)")")")" /usr/lib/jvm/default-java-home
+ENV JAVA_HOME=/usr/lib/jvm/default-java-home
+
+USER airflow
+COPY requirements-airflow.txt /tmp/requirements-airflow.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-airflow.txt
