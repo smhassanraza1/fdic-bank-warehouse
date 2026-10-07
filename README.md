@@ -1,12 +1,15 @@
-# FIG Data Platform
+# FDIC Bank Warehouse
+
+![FDIC Bank Warehouse: a real Airflow run, duplicate-safe streaming, passing data tests and the API, captured from the running stack](docs/media/fdic-bank-warehouse.gif)
 
 An end-to-end data platform for U.S. bank regulatory filings: batch and streaming ingestion of FDIC
 BankFind data into a dbt-modelled BigQuery star schema, orchestrated by Airflow and served over a
 read-only REST API.
 
-Roughly 4,500 institutions across 12 quarters, plus branch-level deposit data (millions of rows) as
-the volume driver for the Spark layer. Every component runs on a free tier — no billing account, no
-cloud deploy. `docker compose up` and one DAG trigger rebuild the warehouse from scratch.
+Roughly 4,600 institutions report each quarter: 55,090 bank-quarter filings across 12 quarters,
+plus branch-level deposit data (about 230,000 rows) as the volume driver for the Spark layer. Every
+component runs on a free tier — no billing account, no cloud deploy. `docker compose up` and one DAG
+trigger rebuild the warehouse from scratch.
 
 ## Architecture
 

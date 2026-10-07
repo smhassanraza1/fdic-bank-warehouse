@@ -40,7 +40,7 @@ from loaders.config import BigQueryConfig
 logger = logging.getLogger(__name__)
 
 app = FastAPI(
-    title="FIG Data Platform API",
+    title="FDIC Bank Warehouse API",
     description="Read-only access to FDIC bank financials in the curated BigQuery layer.",
     version="1.0.0",
     responses={
