@@ -11,6 +11,9 @@ plus branch-level deposit data (about 230,000 rows) as the volume driver for the
 component runs on a free tier — no billing account, no cloud deploy. `docker compose up` and one DAG
 trigger rebuild the warehouse from scratch.
 
+Design write-up: [A bank-filings warehouse built for reruns, duplicates and renames](https://medium.com/@smhassanraza1/a-bank-filings-warehouse-built-for-reruns-duplicates-and-renames-150fa7502547)
+covers the four failure cases that shaped the pipeline and what it still gets wrong.
+
 ## Architecture
 
 ```
